@@ -15,16 +15,14 @@ import java.util.Set;
 @Slf4j
 public class MessageInitService {
 
-    public List<String> initAndGetFilenames(int nodesAmount, int neighboursAmount) {
-
-        List<String> fileNames = new ArrayList<>();
+    public void initAndGetFilenames(int nodesAmount, int neighboursAmount) {
         List<String> urls = new ArrayList<>();
         for (int i = 0; i < nodesAmount; i++) {
             urls.add(String.valueOf(i));
         }
 
-        List<Integer> neighbourCounts = new ArrayList<>(Set.of(5));
-        List<Float> lossRates = List.of(0.0F/*, 0.1F, 0.25F, 0.5F*/);
+        List<Integer> neighbourCounts = new ArrayList<>(Set.of(10));
+        List<Float> lossRates = List.of(0.0F, 0.1F, 0.25F, 0.5F);
 
         try {
             long hash = 0;
@@ -40,13 +38,11 @@ public class MessageInitService {
                     HttpService.send(entity, "http://localhost:82" + url + "/push");
                     System.out.println("Sending gossip " + gossipDto + " to " + "http://localhost:82" + url);
                     log.info(StatisticsService.renderFileName(lossRates.get(lossRateInd), neighbourCounts.get(neighbourCountInd), neighboursAmount, hash));
-                    fileNames.add(StatisticsService.renderFileName(lossRates.get(lossRateInd), neighbourCounts.get(neighbourCountInd), neighboursAmount, hash));
                 }
             }
         } catch (Exception e) {
             log.error(e.getMessage());
             log.error("ooooops");
         }
-        return fileNames;
     }
 }

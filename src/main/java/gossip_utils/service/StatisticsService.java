@@ -15,7 +15,7 @@ import java.util.List;
 public class StatisticsService {
 
     private final String DIR_PATH = "D:\\dev\\gossip\\";
-    private final String STATS_DIR_PATH = DIR_PATH + "stats\\";
+    private final String STATS_DIR_PATH = DIR_PATH + "stats\\lossRate\\";
 
     public void gatherStatistics(long messageHash, float lossRate, int neighboursCount, int neighboursAmount, int nodesAmount) {
 
