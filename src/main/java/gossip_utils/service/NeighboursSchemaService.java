@@ -8,12 +8,25 @@ public class NeighboursSchemaService {
         List<String> assignList = new ArrayList<>();
         Random random = new Random();
 
-
+        Map<String, Set<String>> urlToNeighbours = new HashMap<>();
+        if (neighboursCount == urls.size()) {
+            for(String url: urls) {
+                urlToNeighbours.put(url, new HashSet<>(urls));
+            }
+            return urlToNeighbours;
+        }
+        if (neighboursCount > urls.size() / 2) {
+            assignList = new ArrayList<>(urls);
+            for(String url: urls) {
+                Collections.shuffle(assignList);
+                urlToNeighbours.put(url, new HashSet<>(assignList.subList(0, neighboursCount)));
+            }
+        }
         for (int i = 0; i < neighboursCount; i++) {
             assignList.addAll(urls);
         }
+
 //        System.out.println("assign list: " + assignList);
-        Map<String, Set<String>> urlToNeighbours = new HashMap<>();
         for (String url : urls) {
 //            System.out.println("url: " + url);
 //            System.out.println("assign list: " + assignList);

@@ -3,28 +3,26 @@ package gossip_utils;
 
 import gossip_utils.service.InitScriptService;
 import gossip_utils.service.MessageInitService;
-import gossip_utils.service.StatisticsService;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-
-        System.out.println("Lets start");
         int nodesAmount = 50;
-        int neighboursCount = 40;
-        //assign neighbours to each server
+        int neighboursCount = 50;
         new InitScriptService().init(nodesAmount, neighboursCount);
 
-        Thread.sleep(5000);
 
-//        init message sending
-        List<String> fileNames = new MessageInitService().initAndGetFilenames(nodesAmount, neighboursCount);
-        Thread.sleep(5000);
-        //generate services for docker-compose file
-//        new DockerComposeService().init(50);
+        Thread.sleep(2000);
+        new MessageInitService().initAndGetFilenames(nodesAmount, neighboursCount);
 
-//        gather statistics
-        new StatisticsService().gatherStatisticsByFileName(fileNames, nodesAmount);
+//        new DockerComposeService().init(100);
+        List<String> fileNames = List.of(
+                "25_50_25_0.0",
+                "26_50_10_0.0",
+                "28_50_5_0.0",
+                "27_50_1_0.0");
+
+//        new StatisticsService().gatherStatisticsByFileName(List.of("1_50_5_0.0"), nodesAmount);
     }
 }

@@ -3,6 +3,9 @@ package gossip_utils.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gossip_utils.dto.NeighboursDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
 import java.io.File;
 import java.net.http.HttpClient;
@@ -34,7 +37,10 @@ public class InitScriptService {
                 var url = entry.getKey();
                 if (entry.getKey().length() == 1) url = "0" + url;
                 System.out.println("sending to " + "http://localhost:82" + url + "/neighbours");
-                HttpService.sendPostRequest(client, "http://localhost:82" + url + "/neighbours", objectMapper.writeValueAsString(neighboursDto));
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<NeighboursDto> entity = new HttpEntity<>(neighboursDto, headers);
+                HttpService.send(entity, "http://localhost:82" + url + "/neighbours");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
