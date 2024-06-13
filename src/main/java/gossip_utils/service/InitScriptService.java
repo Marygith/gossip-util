@@ -8,7 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import java.io.File;
-import java.net.http.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,6 @@ public class InitScriptService {
         System.out.println("finished creating neighbours");
         var urlToNeighbours = new NeighboursSchemaService().assignNeighbours(urls, neighboursCount);
         log.info("Created neighbours schema");
-        HttpClient client = HttpClient.newHttpClient();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             for (Map.Entry<String, Set<String>> entry : urlToNeighbours.entrySet()) {
@@ -44,10 +42,7 @@ public class InitScriptService {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-//            client.close();
         }
-
 
     }
 }

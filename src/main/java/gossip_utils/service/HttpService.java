@@ -19,7 +19,6 @@ public class HttpService {
                 .uri(URI.create(url))
                 .version(HttpClient.Version.HTTP_1_1)
                 .header("Content-Type", "application/json")
-//                .header( "Accept", "application/json" )
                 .POST(body)
                 .build();
 
@@ -31,8 +30,6 @@ public class HttpService {
     }
 
     public static void send(HttpEntity entity, String url) {
-
-            restTemplate.postForObject(url, entity, Void.class);
-
+            new RestTemplate().postForObject(url, entity, Void.class);
     }
 }

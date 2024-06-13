@@ -25,11 +25,7 @@ public class NeighboursSchemaService {
         for (int i = 0; i < neighboursCount; i++) {
             assignList.addAll(urls);
         }
-
-//        System.out.println("assign list: " + assignList);
         for (String url : urls) {
-//            System.out.println("url: " + url);
-//            System.out.println("assign list: " + assignList);
 
             Set<String> neighbours = new HashSet<>();
             while (neighbours.size() < neighboursCount) {
@@ -41,15 +37,12 @@ public class NeighboursSchemaService {
                 while (neighbour.equals(url)) {
                     neighbour = assignList.get(random.nextInt(assignList.size()));
                     if (assignList.stream().allMatch(n -> n.equals(url))) break;
-//                    System.out.println("a");
                 }
                 if (neighbour.equals(url)) break;
                 neighbours.add(neighbour);
-//                System.out.println("b");
             }
             neighbours.forEach(assignList::remove);
             urlToNeighbours.put(url, neighbours);
-//            System.out.println("added " + neighbours + " to url " + url);
         }
         return urlToNeighbours;
     }
