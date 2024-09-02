@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         int nodesAmount = 50;
         int neighboursAmount = 50;
+        //first change
 
         new InitScriptService().init(nodesAmount, neighboursAmount);
 
