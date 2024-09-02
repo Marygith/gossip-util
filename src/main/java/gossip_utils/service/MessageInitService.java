@@ -15,6 +15,7 @@ import java.util.Set;
 @Slf4j
 public class MessageInitService {
 
+    //third change
     public void initAndGetFilenames(int nodesAmount, int neighboursAmount) {
         List<String> urls = new ArrayList<>();
         for (int i = 0; i < nodesAmount; i++) {
