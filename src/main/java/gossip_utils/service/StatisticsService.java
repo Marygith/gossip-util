@@ -14,7 +14,6 @@ import java.util.List;
 @Slf4j
 public class StatisticsService {
 
-    //second change
     private final String DIR_PATH = "D:\\dev\\gossip\\";
     private final String STATS_DIR_PATH = DIR_PATH + "stats\\lossRate\\";
 
